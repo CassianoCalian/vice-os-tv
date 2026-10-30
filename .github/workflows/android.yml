@@ -1,4 +1,4 @@
-name: Gerar APK VICE OS
+﻿name: Gerar APK VICE OS
 on:
   workflow_dispatch:
   push:
@@ -21,3 +21,4 @@ jobs:
         with:
           name: VICE-OS-1.0-APK
           path: app/build/outputs/apk/debug/app-debug.apk
+
