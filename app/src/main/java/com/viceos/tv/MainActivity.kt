@@ -48,7 +48,7 @@ class MainActivity : Activity() {
    val card = LinearLayout(this).apply { orientation=LinearLayout.VERTICAL; gravity=Gravity.CENTER; background=shape(Color.rgb(35,35,59)); isFocusable=true; isFocusableInTouchMode=false; setPadding(14,12,14,10) }
    val icon = ImageView(this).apply { setImageDrawable(entry.loadIcon(pm)); scaleType=ImageView.ScaleType.FIT_CENTER }
    card.addView(icon, LinearLayout.LayoutParams(64,64))
-   val name=label(entry.loadLabel(pm).toString(),13,true).apply { gravity=Gravity.CENTER; maxLines=1; ellipsize=android.text.TextUtils.TruncateAt.END; setPadding(0,9,0,0) }
+   val name=label(entry.loadLabel(pm).toString(),13f,true).apply { gravity=Gravity.CENTER; maxLines=1; ellipsize=android.text.TextUtils.TruncateAt.END; setPadding(0,9,0,0) }
    card.addView(name,LinearLayout.LayoutParams(-1,-2))
    card.setOnFocusChangeListener { v, focused -> v.alpha=if(focused) 1f else .82f; v.scaleX=if(focused) 1.06f else 1f; v.scaleY=if(focused) 1.06f else 1f; v.background=shape(if(focused) Color.rgb(133,48,136) else Color.rgb(35,35,59)) }
    card.setOnClickListener { try { val launch = pm.getLeanbackLaunchIntentForPackage(entry.activityInfo.packageName) ?: pm.getLaunchIntentForPackage(entry.activityInfo.packageName) ?: Intent().setClassName(entry.activityInfo.packageName,entry.activityInfo.name); startActivity(launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) } catch (_:Exception) { Toast.makeText(this,"NÃ£o foi possÃ­vel abrir o aplicativo",Toast.LENGTH_SHORT).show() } }
