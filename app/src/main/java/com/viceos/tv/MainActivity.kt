@@ -1,4 +1,4 @@
-package com.viceos.tv
+﻿package com.viceos.tv
 
 import android.app.Activity
 import android.content.Intent
@@ -36,7 +36,7 @@ class MainActivity : Activity() {
   val hero = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(30,24,24,24); background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(Color.argb(225,18,13,39),Color.argb(155,86,24,89),Color.argb(90,27,23,54))).apply { cornerRadius=26f } }
   val title = label("BEM-VINDO A VICE CITY",29,true); hero.addView(title)
   val subtitle = label("Sua TV. Seu universo. Seu estilo.",17); subtitle.setPadding(0,8,0,12); hero.addView(subtitle)
-  hero.addView(label("VICE OS 1.0  •  MIAMI EDITION",12,true))
+  hero.addView(label("VICE OS 1.0  â€¢  MIAMI EDITION",12,true))
   root.addView(hero,LinearLayout.LayoutParams(-1,0,1.05f).apply { topMargin=22 })
   val heading = label("Seus aplicativos",21,true); heading.setPadding(0,19,0,12); root.addView(heading)
   val scroll = HorizontalScrollView(this).apply { isHorizontalScrollBarEnabled = false }
@@ -51,16 +51,17 @@ class MainActivity : Activity() {
    val name=label(entry.loadLabel(pm).toString(),13,true).apply { gravity=Gravity.CENTER; maxLines=1; ellipsize=android.text.TextUtils.TruncateAt.END; setPadding(0,9,0,0) }
    card.addView(name,LinearLayout.LayoutParams(-1,-2))
    card.setOnFocusChangeListener { v, focused -> v.alpha=if(focused) 1f else .82f; v.scaleX=if(focused) 1.06f else 1f; v.scaleY=if(focused) 1.06f else 1f; v.background=shape(if(focused) Color.rgb(133,48,136) else Color.rgb(35,35,59)) }
-   card.setOnClickListener { try { val launch = pm.getLeanbackLaunchIntentForPackage(entry.activityInfo.packageName) ?: pm.getLaunchIntentForPackage(entry.activityInfo.packageName) ?: Intent().setClassName(entry.activityInfo.packageName,entry.activityInfo.name); startActivity(launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) } catch (_:Exception) { Toast.makeText(this,"Não foi possível abrir o aplicativo",Toast.LENGTH_SHORT).show() } }
+   card.setOnClickListener { try { val launch = pm.getLeanbackLaunchIntentForPackage(entry.activityInfo.packageName) ?: pm.getLaunchIntentForPackage(entry.activityInfo.packageName) ?: Intent().setClassName(entry.activityInfo.packageName,entry.activityInfo.name); startActivity(launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) } catch (_:Exception) { Toast.makeText(this,"NÃ£o foi possÃ­vel abrir o aplicativo",Toast.LENGTH_SHORT).show() } }
    apps.addView(card,LinearLayout.LayoutParams(156,124).apply { rightMargin=14 })
   }
   if(entries.isEmpty()) apps.addView(label("Nenhum aplicativo de TV encontrado",17))
   scroll.addView(apps); root.addView(scroll,LinearLayout.LayoutParams(-1,140))
-  val footer=Button(this).apply { text="⚙  Configurações do Android"; isAllCaps=false; setOnClickListener { startActivity(Intent(Settings.ACTION_SETTINGS)) } }
+  val footer=Button(this).apply { text="âš™  ConfiguraÃ§Ãµes do Android"; isAllCaps=false; setOnClickListener { startActivity(Intent(Settings.ACTION_SETTINGS)) } }
   root.addView(footer,LinearLayout.LayoutParams(260,55).apply { topMargin=8 })
   setContentView(root); if(apps.childCount>0) apps.getChildAt(0).requestFocus()
-  val update = object:Runnable { override fun run() { clock.text=SimpleDateFormat("HH:mm  •  EEE, dd MMM",Locale("pt","BR")).format(Date()); handler.postDelayed(this,30000) } }
+  val update = object:Runnable { override fun run() { clock.text=SimpleDateFormat("HH:mm  â€¢  EEE, dd MMM",Locale("pt","BR")).format(Date()); handler.postDelayed(this,30000) } }
   handler.post(update)
  }
  override fun onDestroy() { handler.removeCallbacksAndMessages(null); super.onDestroy() }
 }
+
