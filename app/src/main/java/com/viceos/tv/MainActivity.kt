@@ -1,4 +1,4 @@
-﻿package com.viceos.tv
+package com.viceos.tv
 
 import android.app.Activity
 import android.content.Intent
@@ -30,15 +30,15 @@ class MainActivity : Activity() {
   window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
   val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(42,25,42,24); background = BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.vice_background)).apply { gravity = Gravity.FILL } }
   val top = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
-  top.addView(label("VICE  OS",27,true), LinearLayout.LayoutParams(0,-2,1f))
-  clock = label("",19,true); top.addView(clock)
+  top.addView(label("VICE  OS",27f,true), LinearLayout.LayoutParams(0,-2,1f))
+  clock = label("",19f,true); top.addView(clock)
   root.addView(top)
   val hero = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(30,24,24,24); background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(Color.argb(225,18,13,39),Color.argb(155,86,24,89),Color.argb(90,27,23,54))).apply { cornerRadius=26f } }
-  val title = label("BEM-VINDO A VICE CITY",29,true); hero.addView(title)
-  val subtitle = label("Sua TV. Seu universo. Seu estilo.",17); subtitle.setPadding(0,8,0,12); hero.addView(subtitle)
-  hero.addView(label("VICE OS 1.0  â€¢  MIAMI EDITION",12,true))
+  val title = label("BEM-VINDO A VICE CITY",29f,true); hero.addView(title)
+  val subtitle = label("Sua TV. Seu universo. Seu estilo.",17f); subtitle.setPadding(0,8,0,12); hero.addView(subtitle)
+  hero.addView(label("VICE OS 1.0  -  MIAMI EDITION",12f,true))
   root.addView(hero,LinearLayout.LayoutParams(-1,0,1.05f).apply { topMargin=22 })
-  val heading = label("Seus aplicativos",21,true); heading.setPadding(0,19,0,12); root.addView(heading)
+  val heading = label("Seus aplicativos",21f,true); heading.setPadding(0,19,0,12); root.addView(heading)
   val scroll = HorizontalScrollView(this).apply { isHorizontalScrollBarEnabled = false }
   val apps = LinearLayout(this).apply { orientation=LinearLayout.HORIZONTAL }
   val pm = packageManager
@@ -54,12 +54,12 @@ class MainActivity : Activity() {
    card.setOnClickListener { try { val launch = pm.getLeanbackLaunchIntentForPackage(entry.activityInfo.packageName) ?: pm.getLaunchIntentForPackage(entry.activityInfo.packageName) ?: Intent().setClassName(entry.activityInfo.packageName,entry.activityInfo.name); startActivity(launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) } catch (_:Exception) { Toast.makeText(this,"NÃ£o foi possÃ­vel abrir o aplicativo",Toast.LENGTH_SHORT).show() } }
    apps.addView(card,LinearLayout.LayoutParams(156,124).apply { rightMargin=14 })
   }
-  if(entries.isEmpty()) apps.addView(label("Nenhum aplicativo de TV encontrado",17))
+  if(entries.isEmpty()) apps.addView(label("Nenhum aplicativo de TV encontrado",17f))
   scroll.addView(apps); root.addView(scroll,LinearLayout.LayoutParams(-1,140))
   val footer=Button(this).apply { text="âš™  ConfiguraÃ§Ãµes do Android"; isAllCaps=false; setOnClickListener { startActivity(Intent(Settings.ACTION_SETTINGS)) } }
   root.addView(footer,LinearLayout.LayoutParams(260,55).apply { topMargin=8 })
   setContentView(root); if(apps.childCount>0) apps.getChildAt(0).requestFocus()
-  val update = object:Runnable { override fun run() { clock.text=SimpleDateFormat("HH:mm  â€¢  EEE, dd MMM",Locale("pt","BR")).format(Date()); handler.postDelayed(this,30000) } }
+  val update = object:Runnable { override fun run() { clock.text=SimpleDateFormat("HH:mm  -  EEE, dd MMM",Locale("pt","BR")).format(Date()); handler.postDelayed(this,30000) } }
   handler.post(update)
  }
  override fun onDestroy() { handler.removeCallbacksAndMessages(null); super.onDestroy() }
